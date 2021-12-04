@@ -1,0 +1,2 @@
+0000000001100101 //jal x1, x4, 0 (expected jump 1 and put pc into x4)
+0000000000000111 //halt (expected pc halts)
