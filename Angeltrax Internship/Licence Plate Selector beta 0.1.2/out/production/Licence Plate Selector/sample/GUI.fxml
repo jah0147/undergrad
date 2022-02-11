@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="837.0" style="-fx-border-color: #383d45;" text="Photo Cropping Tool" textAlignment="CENTER" textFill="#0000008c" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <GridPane prefHeight="453.0" prefWidth="803.0" style="-fx-background-color: gray;">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="344.5" minHeight="10.0" prefHeight="321.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="139.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <SplitPane dividerPositions="0.875" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="458.0" prefWidth="833.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="841.0" style="-fx-background-color: #656e7d;">
+                            <children>
+                                <Group fx:id="imageLayer">
+                                    <children>
+                                      <Text fill="#0000005a" layoutX="381.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please browse for a photo to edit" textAlignment="CENTER" />
+                                        <ImageView fx:id="imageViewMain" fitHeight="396.0" fitWidth="662.0" layoutX="165.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+
+                                        </ImageView>
+                              <Group fx:id="scrollImageViewGroup">
+                                 <children>
+                                    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" prefHeight="397.0" prefWidth="155.0">
+                                       <content>
+                                          <VBox fx:id="scrollVBox" alignment="TOP_CENTER" blendMode="DARKEN" fillWidth="false" prefHeight="395.0" prefWidth="141.0" snapToPixel="false" style="-fx-background-color: #7f8897;" />
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </Group>
+                                    </children>
+                                </Group>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="54.0" prefWidth="926.0" style="-fx-background-color: #4f5661;">
+                            <children>
+                                <Button fx:id="save" layoutX="776.0" layoutY="15.0" mnemonicParsing="false" text="Save" />
+                                <Button fx:id="cancel" cancelButton="true" layoutX="706.0" layoutY="15.0" mnemonicParsing="false" text="Cancel" />
+                                <Button fx:id="browse" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Browse" />
+                        <Button fx:id="clear" layoutX="87.0" layoutY="15.0" mnemonicParsing="false" text="Clear" />
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </children>
+        </GridPane>
+    </content>
+</TitledPane>
