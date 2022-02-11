@@ -1,0 +1,6 @@
+function [z] = pol2rec(r, theta)
+%UNTITLED2 Summary of this function goes here
+%   polar to rectangular
+z = r*exp(j*deg2rad*theta);
+end
+
