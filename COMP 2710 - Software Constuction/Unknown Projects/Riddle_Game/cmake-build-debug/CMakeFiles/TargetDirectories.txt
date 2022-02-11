@@ -1,0 +1,3 @@
+/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Riddle_Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Riddle_Game/cmake-build-debug/CMakeFiles/Riddle_Game.dir
+/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Riddle_Game/cmake-build-debug/CMakeFiles/edit_cache.dir
