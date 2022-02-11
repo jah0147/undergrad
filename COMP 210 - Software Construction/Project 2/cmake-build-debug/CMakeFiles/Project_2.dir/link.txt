@@ -1,1 +1,0 @@
-/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/Project_2.dir/project2_jah0147.cpp.o  -o Project_2.exe -Wl,--out-implib,libProject_2.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

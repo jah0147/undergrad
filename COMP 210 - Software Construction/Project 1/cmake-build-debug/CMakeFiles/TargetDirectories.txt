@@ -1,3 +1,0 @@
-/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Project 1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Project 1/cmake-build-debug/CMakeFiles/Project_1.dir
-/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Project 1/cmake-build-debug/CMakeFiles/edit_cache.dir
