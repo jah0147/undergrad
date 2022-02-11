@@ -1,0 +1,81 @@
+1. Which register number is used for the stack pointer (sp) in OS/161?
+      Answer: $29
+
+2. What bus/busses does OS/161 support?
+      Answer: LAMEbus
+
+3. What is the difference between splhigh and spl0?
+      Answer: splhigh is defined as Set Priority Level high whitch disables all interrupts
+		          spl0    is defined as Set Priority Level 0 which enables all interrupts.
+
+4. Why do we use typedefs like u_int32_t instead of simply saying "int"?
+      Answer: To specify it is a 32-bit number
+
+5. What does splx return?
+      Answer: This function returns oldspl
+
+6. What is the highest interrupt level?
+      Answer: 15
+
+7. How frequently are hardclock interrupts generated?
+      Answer: 100hz
+
+8. What functions comprise the standard interface to a VFS device?
+      Answer: d_open, d_close, d_io, d_ioctl  from kern/include/dev.h
+
+9. How many characters are allowed in a volume name?
+      Answer: 32
+
+10. How many direct blocks does an SFS file have?
+      Answer: SFS uses block sizes ranging from 512 (29) to 32768 (215) bytes
+              with a maximum partition size of 128 GB
+
+11. What is the standard interface to a file system (i.e., what functions must you implement to
+implement a new file system)?
+      Answer: fs_sync, fs_getvolname, fs_getroot, fs_umount
+
+12. What function puts a thread to sleep?
+      Answer: void thread_sleep(const void *addr);
+
+13. How large are OS/161 pids?
+      Answer:typedef int32_t pid_t; (32 bits / 4 bytes)
+
+14. What operations can you do on a vnode?
+      Answer: open, close, reclaim, read, readlink, getdirentry,
+            write, ioctl, stat, gettype, tryseek, fsync, mmap,
+            truncate, namefile, creat, symlink, mkdir, link,
+            remove, rmdir, rename, lookup, lookparent
+            (from kern/include/vnode.h)
+
+
+15. What is the maximum path length in OS/161?
+      Answer: #define PATH_MAX 1024 (from kern/include/kern/limits.h)
+
+16. What is the system call number for a reboot?
+      Answer:#define SYS_reboot 8 /* Reboot system */ (from kern/include/kern/callno.h)
+
+17. Where is STDIN_FILENO defined?
+      Answer: #define STDIN_FILENO 0 /* Standard input */ (from kern/include/kern/unistd.h)
+
+18. Is it OK to initialize the thread system before the scheduler? Why or why not?
+      Answer: Yes. The scheduler bootstrap just creates the run queue and
+              the thread bootstrap just initializes the first thread
+
+19. What is a zombie?
+      Answer: Zombies are threads/processes that have exited but not
+              been fully deleted yet (from kern/thread/thread.c)
+
+20. How large is the initial run queue?
+      Answer: runqueue = q_create(32); (from kern/thread/scheduler.c)
+
+21. What does a device name in OS/161 look like?
+      Answer: device: (from kern/fs/vfs/device.c)
+
+22. What does a raw device name in OS/161 look like?
+      Answer: The name with "raw" appended, such as lhd0raw:(from kern/fs/vfs/vfslist.c)
+
+23. What lock protects the vnode reference count?
+      Answer: vn_countlock (from kern/fs/vfs/vnode.c)
+
+24. What device types are currently supported?
+      Answer: Block & character devices (from kern/fs/vfs/device.c)
