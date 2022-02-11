@@ -1,5 +1,7 @@
 # Internship at Angeltrax Code
 
+While I did write most of the code for this application, this software is the poperty of Angeltrax.
+
 I, along with a fellow intern, wrote and designed this javaFX software for AngelTrax Mobile Video Surveillance Solutions.
 
 This application is designed to take in .zip file data containing plots of Licence Plate images to edit and safe.
@@ -12,4 +14,4 @@ This Software has several Versions. I believe b0.9.1 is the latest verson.
 When compiled and ran, these different version will have different functions than the final product. 
 This may also include bugs.
 
-While I did write most of the code for this application, this software is the poperty of Angeltrax.
+
