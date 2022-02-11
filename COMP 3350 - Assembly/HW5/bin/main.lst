@@ -1,0 +1,104 @@
+
+Freescale HC12-Assembler 
+(c) Copyright Freescale 1987-2015
+
+ Abs. Rel.   Loc    Obj. code   Source line
+ ---- ----   ------ ---------   -----------
+    1    1                      ;*****************************************************************
+    2    2                      ;* This stationery serves as the framework for a                 *
+    3    3                      ;* user application (single file, absolute assembly application) *
+    4    4                      ;* For a more comprehensive program that                         *
+    5    5                      ;* demonstrates the more advanced functionality of this          *
+    6    6                      ;* processor, please see the demonstration applications          *
+    7    7                      ;* located in the examples subdirectory of the                   *
+    8    8                      ;* Freescale CodeWarrior for the HC12 Program directory          *
+    9    9                      ;*****************************************************************
+   10   10                      
+   11   11                      ; export symbols
+   12   12                                  XDEF Entry, _Startup            ; export 'Entry' symbol
+   13   13                                  ABSENTRY Entry        ; for absolute assembly: mark this as application entry point
+   14   14                      
+   15   15                      
+   16   16                      
+   17   17                      ; Include derivative-specific definitions 
+   18   18                      
+   19   19          0000 0800   RAMStart    EQU  $0800 
+   20   20          0000 4000   ROMStart    EQU  $4000  ; absolute address to place my code/constant data
+   21   21                      
+   22   22                      ; variable/data section
+   23   23                      
+   24   24                                  ORG RAMStart
+   25   25                      
+   26   26  a000800 10D0 20E0   samples     DC.B    $10,$D0,$20,$E0,$B0,$50
+             000804 B050       
+   27   27  a000806 0000        nsum        DC.W    0
+   28   28  a000808 0000        psum        DC.W    0
+   29   29  a00080A 0000        sqsum       DC.W    0
+   30   30                      
+   31   31                      
+   32   32                                  ORG   ROMStart
+   33   33                      
+   34   34                      Entry:
+   35   35                      _Startup:
+   36   36                                
+   37   37  a004000 CE08 00                 ldx     #samples      ;loads x with value at samples      
+   38   38  a004003 8600                    ldaa    #0
+   39   39                                  
+   40   40                      loop: 
+   41   41  a004005 8106                    cmpa    #6            ;compairs a with 6 to check if the loop should keep going
+   42   42  a004007 271F                    beq     squareSum
+   43   43                                  
+   44   44  a004009 E600                    ldab    0,x           ;loads b with value at x
+   45   45                      
+   46   46  a00400B 42                      inca                   ;increments a by 1 
+   47   47  a00400C C100                    cmpb    #0             ;compairs b with zero, if higher will go to positiv banch, if lower goes to negative
+   48   48  a00400E 2D0D                    blt     negativeSum    ;goes to negative branch if lower than zero
+   49   49  a004010 2E00                    bgt     positiveSum    ;goes to positive branch if greater than zero
+   50   50                                 
+   51   51                      positiveSum:            
+   52   52  a004012 FD08 08                 ldy     psum           ;loads y with value at psum
+   53   53  a004015 19ED                    aby                    ;adds b to y
+   54   54  a004017 7D08 08                 sty     psum           ;stores newly added value into psum
+   55   55  a00401A 08                      inx                    ;increments x by 1
+   56   56  a00401B 20E8                    bra     loop           ;goes back to loop branch
+   57   57                                  
+   58   58                      negativeSum:
+   59   59  a00401D FD08 06                 ldy     nsum           ;loads y with value at nsum
+   60   60  a004020 19ED                    aby                    ;adds b to y
+   61   61  a004022 7D08 06                 sty     nsum           ;stores newly added value
+   62   62  a004025 08                      inx                    ;increments x by 1
+   63   63  a004026 20DD                    bra     loop           ;goes back to loop branch
+
+Freescale HC12-Assembler 
+(c) Copyright Freescale 1987-2015
+
+ Abs. Rel.   Loc    Obj. code   Source line
+ ---- ----   ------ ---------   -----------
+   64   64                                  
+   65   65                      
+   66   66                      squareSum:  
+   67   67  a004028 FC08 08                 ldd   psum             ;loads d with psum 
+   68   68  a00402B FD08 08                 ldy   psum             ;loads y with psum
+   69   69  a00402E 1813                    emuls                  ;multiplies d and y with signed value
+   70   70                                  
+   71   71  a004030 7C08 0A                 std   sqsum            ;stores d into sqsum
+   72   72                                  
+   73   73  a004033 FC08 06                 ldd   nsum             ;loads d with nsum
+   74   74  a004036 FD08 06                 ldy   nsum             ;loads y with nsum
+   75   75  a004039 1813                    emuls                  ;multiplies d with y with signed values
+   76   76                                  
+   77   77  a00403B F308 0A                 addd   sqsum           ;adds d with sqsum
+   78   78                                  
+   79   79  a00403E 7C08 0A                 std   sqsum            ;stores new value of d in squm
+   80   80                                  
+   81   81  a004041 2000                    bra    done            ;goes to done branch
+   82   82                                           
+   83   83                                  
+   84   84                      done:
+   85   85  a004043 3D                      rts                   ; result in D
+   86   86                      
+   87   87                      ;**************************************************************
+   88   88                      ;*                 Interrupt Vectors                          *
+   89   89                      ;**************************************************************
+   90   90                                  ORG   $FFFE
+   91   91  a00FFFE 4000                    DC.W  Entry           ; Reset Vector
