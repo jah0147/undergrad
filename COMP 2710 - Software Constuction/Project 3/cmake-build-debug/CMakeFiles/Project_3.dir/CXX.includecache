@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/Jacob Howard/Desktop/Coding/C++/Projects/Project 3/project3_jah0147.cpp
+fstream
+-
+iostream
+-
+cstdlib
+-
+string
+-
+cassert
+-
+
