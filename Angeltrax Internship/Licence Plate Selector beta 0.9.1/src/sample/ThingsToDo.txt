@@ -1,0 +1,10 @@
+**put an asterisk and the date finished when you complete a task**
+
+1. toggle button *7/10*
+2. rubberband completely freezing when hits wall. make it to where it only freezes on the side that is out of bounds *7/10*
+3. resize app (WIP)
+4. test what happens if you hit browse while you have another folder open *7/10*
+5. test what happens if you hit browse while you have another folder open and then make changes *7/10*
+6. test what happens if you hit browse on the same folder and then make changes *7/10*
+7. if you hit cancel with no rectangle then give pop up saying there is nothing to cancel *7/10*
+8. pick colors/way to show if toggle button is enabled or not

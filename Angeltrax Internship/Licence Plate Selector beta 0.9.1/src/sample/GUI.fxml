@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="654.0" maxWidth="1191.0" minHeight="654.0" minWidth="1191.0" prefHeight="654.0" prefWidth="1191.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.9238241308793457" orientation="VERTICAL" pickOnBounds="false" prefHeight="654.0" prefWidth="1191.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane style="-fx-background-color: #404040;">
+               <children>
+                  <Group fx:id="scrollImageViewGroup">
+                     <children>
+                        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" layoutX="-2.0" layoutY="-2.0" prefHeight="600.0" prefWidth="155.0">
+                           <content>
+                              <VBox fx:id="scrollVBox" alignment="TOP_CENTER" blendMode="DARKEN" fillWidth="false" prefHeight="599.0" prefWidth="141.0" snapToPixel="false" style="-fx-background-color: #404040;" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Group>
+                  <Pane layoutX="153.0" prefHeight="598.0" prefWidth="1037.0">
+                     <children>
+                        <Group fx:id="imageLayer">
+                           <children>
+                              <Text fx:id="imageViewMainText" fill="#0000005a" layoutX="400.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Browse for a Photo to Edit" textAlignment="CENTER" />
+                              <ImageView fx:id="imageViewMain" fitHeight="600.0" fitWidth="1038.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                              <AnchorPane layoutX="954.0" layoutY="575.3671875" />
+                           </children>
+                        </Group>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane style="-fx-background-color: #525252;">
+               <children>
+                  <Button fx:id="save" layoutX="1136.0" layoutY="11.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="cancel" cancelButton="true" layoutX="1074.0" layoutY="11.0" mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="browse" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" text="Browse" />
+                  <Button fx:id="clear" layoutX="79.0" layoutY="11.0" mnemonicParsing="false" text="Clear" />
+                  <ToggleButton fx:id="toggleBoundsButton" layoutX="559.0" layoutY="11.0" mnemonicParsing="false" style="-fx-border-color: #ff1a23; -fx-border-radius: 2; -fx-border-width: 2;" text="Toggle Previous Bounds" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
