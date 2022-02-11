@@ -1,0 +1,11 @@
+2 Shift Registers | SN74LS164 
+
+4 2-pin XOR Gates | SN7486 
+
+1 4-pin NOR gate | SN7425
+
+1 2-pin AND Gate | SN7408
+
+1 3-pin AND Gate (use 2  3-pin NAND) | SN7410 
+
+4 Inverters | SN7404 
