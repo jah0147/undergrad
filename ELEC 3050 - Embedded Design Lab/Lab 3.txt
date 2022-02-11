@@ -1,0 +1,149 @@
+#include "stm32l4xx.h"
+
+/*Global variables*/
+
+static int count_value = 0; //counts up or down
+static int count_value2 = 0; //only counts up
+
+static unsigned char PB3=0;
+static unsigned char PB4=0;
+static unsigned char up=0; // =1 countAincrements; =0 countA decrements
+static unsigned char run=0;   // = 1 counters begin
+
+/*Function Definitions*/
+
+/*Delay Function*/
+
+void delay(){
+int i,j;
+for (i=0;i<20;i++){
+i=i;
+for(j=0;j<20000;j++){
+}
+}
+}
+
+/* Configure port PA1 as falling edge interrupton EXTI1 */
+
+void PA1Setup(){
+
+/* Enable SYSCFG clock */
+RCC->APB2ENR |= 0x01; //Enables GPIOA clock (bit 0)
+/* Select PA1 as EXTI1 */
+SYSCFG->EXTICR[0] &= ~SYSCFG_EXTICR1_EXTI1; // clear EXTI1 bit in config reg
+SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI1_PA; // set PA1 as interrupt source ****should there be a 1 at the end?
+/* configure and enable EXTI1 as falling-edge triggered */
+EXTI->FTSR1 |= EXTI_FTSR1_FT1; // EXTI1 = falling-edge triggered
+EXTI->PR1 = EXTI_PR1_PIF1; // clear EXTI1 pending bit
+EXTI->IMR1 |= EXTI_IMR1_IM1; // Enable EXTI1
+/* Program NVIC to clear pending bit and enale EXTI1 */
+NVIC_ClearPendingIRQ(EXTI1_IRQn); // Clear NVIC pending bits
+NVIC_EnableIRQ(EXTI1_IRQn); // Enable IRQ
+}
+/*Configure port PA2 as falling edge interruption EXTI2 */
+void PA2Setup(){
+/* Enable SYSCFG clock */
+RCC->APB2ENR |= 0x01; //Enables GPIOA clock (bit 0)
+/* Select PA2 as EXTI2 */
+SYSCFG->EXTICR[0] &= ~SYSCFG_EXTICR1_EXTI2; // clear EXTI2 bit in config reg
+SYSCFG->EXTICR[0] |= SYSCFG_EXTICR1_EXTI2_PA; // set PA2 as interrupt source ****should there be a 2 at the end?
+/* configure and enable EXTI2 as falling-edge triggered */
+EXTI->FTSR1 |= EXTI_FTSR1_FT2; // EXTI2 = falling-edge triggered
+EXTI->PR1 = EXTI_PR1_PIF2; // clear EXTI2 pending bit
+EXTI->IMR1 |= EXTI_IMR1_IM2; // Enable EXTI2
+
+/* Program NVIC to clear pending bit and enale EXTI1 */
+NVIC_ClearPendingIRQ(EXTI2_IRQn); // Clear NVIC pending bits
+NVIC_EnableIRQ(EXTI2_IRQn); // Enable IRQ
+__enable_irq();
+}
+/* Pin Setup */
+
+void PinSetup(){
+RCC->AHB2ENR |= 0x01; // Enables GPIOA clock (bit 0)
+GPIOA->MODER &= ~(0x3FFFF3C); // input mode
+GPIOA->MODER |= (0x001555500); // set output
+RCC->AHB2ENR |= 0x02; // Enables GPIOB clock (bit1)
+GPIOB->MODER &=~(0x0000FFFF); // Resets pins for output
+GPIOB->MODER |=(0x0005555); // Set Output
+}
+/*------------------------------------------------*/
+/* Implements count function */
+/*------------------------------------------------*/
+void counting() {
+   if (run != 0) {
+      if (count_value != 0) {
+         count_value = count_value - 1;
+      }
+      else {
+         count_value = 9;
+      }
+   }
+   else {
+      if (count_value == 9) {
+         count_value = 0;
+      }
+      else {
+         count_value = count_value + 1;
+      }
+   }
+if(count_value2 == 9)
+{
+count_value2 = 0;
+}
+else
+{
+count_value2 = count_value2 + 1;
+}
+/* Interrupt Functions */
+}
+void EXTI1_IRQHandler(){
+__disable_irq();
+
+/* Toggle PB3 */
+if (PB3==1){
+PB3=0;}
+else{
+PB3=1;}
+/* Toggle up */
+if (up==1){
+up=0;}
+else{
+up=1;}
+EXTI->PR1 = EXTI_PR1_PIF1; // clear EXTI1 pending bit
+NVIC_ClearPendingIRQ(EXTI1_IRQn); // Clear NVIC pending bits
+__enable_irq();
+}
+void EXTI2_IRQHandler(){
+__disable_irq();
+/* Toggle PB3 */
+if (PB4==1){
+PB4=0;}
+else{
+PB4=1;}
+/* Toggle up */
+if (run==1){
+run=0;}
+else{
+run=1;}
+EXTI->PR1 = EXTI_PR1_PIF2; // clear EXTI1 pending bit
+ NVIC_ClearPendingIRQ(EXTI2_IRQn); // Clear NVIC pending bits
+__enable_irq();
+}
+
+/* Main Program */
+
+int main(void){
+
+PinSetup();
+PA1Setup();
+PA2Setup();
+
+while(1){ // Endless Loop
+delay();
+counting();
+GPIOA->ODR = ((count_value & 0x0F) << 4 | (count_value2 & 0x0F))<<5;
+GPIOB->ODR = (((PB3<<3) | (PB4)<<4) | (GPIOA->ODR & ~(0x30))); // Setting PBs as outputs
+}
+return 0;
+}
