@@ -1,0 +1,10 @@
+Icosahedron Test List
+Small
+blue
+0.01
+    Medium    
+orange
+12.3
+Large
+  white  
+123.4
