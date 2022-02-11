@@ -1,0 +1,131 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.33.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Jacob Howard, Auburn University, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.33.0.0
+Toolchain Path:  D:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.15
+Assembler:       Armasm.exe V6.15
+Linker/Locator:  ArmLink.exe V6.15
+Library Manager: ArmAr.exe V6.15
+Hex Converter:   FromElf.exe V6.15
+CPU DLL:         SARMCM3.DLL V5.33.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      UL2CM3.DLL V1.163.9.0
+Dialog DLL:      TCM.DLL V1.48.0.0
+ 
+<h2>Project:</h2>
+C:\Users\jacob\OneDrive - Auburn University\Current Classes\Electronic Design Lab\Lab 2 Stuff\Lab2\Lab2.uvprojx
+Project File Date:  02/01/2021
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.15', folder: 'D:\Keil_v5\ARM\ARMCLANG\Bin'
+Rebuild target 'Target 1'
+Lab2.c(22): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+        GPIOB->MODER &= ~(0x000003C0); /* Clear PB4-PB3 mode bits */
+                     ~~ ^~~~~~~~~~~~~
+Lab2.c(28): warning: '/*' within block comment [-Wcomment]
+/*----------------------------------------------------------*/
+^
+Lab2.c(16): warning: no previous prototype for function 'PinSetup' [-Wmissing-prototypes]
+void PinSetup () {
+     ^
+Lab2.c(16): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void PinSetup () {
+^
+static 
+Lab2.c(16): warning: this old-style function definition is not preceded by a prototype [-Wstrict-prototypes]
+void PinSetup () {
+              ^
+Lab2.c(43): warning: '/*' within block comment [-Wcomment]
+/*----------------------------------------------------------*/
+^
+Lab2.c(30): warning: no previous prototype for function 'countUpandDown9' [-Wmissing-prototypes]
+void countUpandDown9 (int i) {
+     ^
+Lab2.c(30): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void countUpandDown9 (int i) {
+^
+static 
+Lab2.c(45): warning: no previous prototype for function 'count' [-Wmissing-prototypes]
+        void count (unsigned char j) {
+             ^
+Lab2.c(45): note: declare 'static' if the function is not intended to be used outside of this translation unit
+        void count (unsigned char j) {
+        ^
+        static 
+Lab2.c(66): error: invalid operands to binary expression ('void (unsigned char)' and 'int')
+        GPIOA->ODR = (GPIOA->ODR & ~(0x1FE0)) | (((count << 4) + countUpandDown9) << 5);
+                                                   ~~~~~ ^  ~
+Lab2.c(70): error: use of undeclared identifier 'sw1'
+        while (sw1 == 0) {
+               ^
+Lab2.c(71): error: use of undeclared identifier 'sw1'
+        sw1 = GPIOA->IDR & 0x0800;
+        ^
+Lab2.c(75): warning: implicit conversion loses integer precision: 'int' to 'unsigned char' [-Wimplicit-int-conversion]
+        count(j);
+        ~~~~~ ^
+Lab2.c(92): error: use of undeclared identifier 'sw1'
+                sw1 = GPIOA->IDR & 0x0800; //Read GPIOA and mask all but bit 11
+                ^
+Lab2.c(95): error: use of undeclared identifier 'sw1'
+                while (sw1 == 0) { //Wait for SW1 = 1 on PA11
+                       ^
+Lab2.c(96): error: use of undeclared identifier 'sw1'
+                        sw1 = GPIOA->IDR & 0x0800; //Read GPIOA and mask all but bit 11
+                        ^
+Lab2.c(99): warning: implicit declaration of function 'delay' is invalid in C99 [-Wimplicit-function-declaration]
+                delay(); //Time delay for button release
+                ^
+Lab2.c(9): warning: no previous extern declaration for non-static variable 'toggles' [-Wmissing-variable-declarations]
+int toggles; /* number of times LED state toggled */
+    ^
+Lab2.c(9): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int toggles; /* number of times LED state toggled */
+^
+10 warnings and 6 errors generated.
+compiling Lab2.c...
+compiling system_stm32l4xx.c...
+assembling startup_stm32l432xx.s...
+".\Objects\Lab2.axf" - 6 Error(s), 10 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.4.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32L4xx_DFP.2.5.0.pack
+                Keil.STM32L4xx_DFP.2.5.0
+                STMicroelectronics STM32L4 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.3.1
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\Users\jacob\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  C:\Users\jacob\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\2.5.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.4.0
+
+   * Component: Keil::Device:Startup:1.3.1
+      Source file:   MDK\Device\Source\ARM\STM32L4xx_SB_OPT.s
+      Include file:  Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h
+      Source file:   Drivers\CMSIS\Device\ST\STM32L4xx\Source\Templates\arm\startup_stm32l432xx.s
+      Source file:   Drivers\CMSIS\Device\ST\STM32L4xx\Source\Templates\system_stm32l4xx.c
+Target not created.
+Build Time Elapsed:  00:00:00
+</pre>
+</body>
+</html>
