@@ -1,0 +1,55 @@
+- Project 5 Report
+- COMP 3500
+- Jacob Howard
+
+7.1 (6points) Solution Description
+
+(1)How did you separate scheduling mechanism from scheduling policies?
+    Kernel with a priority scheduler.
+
+(2)How did implement the three scheduling algorithms?
+    I used CLion IDE in C to write the 3 algorithms.
+
+(3)How did you calculate waiting times?
+    Waiting time is calculated by the turnaround time subtracted by the burst time.
+
+(4)How did you calculate response times?
+    Calculated by the time at which the process gets the CPU for the first time subtracted by the arrival time.
+
+(5)How did you calculate turnaround times?
+    calculated by the finish time subtracted by the arrival time.
+
+(6)How did you implement the command-line parser?
+    I wrote a c file to deal with the command line "command.c".
+
+
+7.2(6points) Generality and Error Checking
+
+(1)How general is your solution?
+      Should be very understandable to read and run.
+
+(2)How easy would it be to add a new scheduling policy into your scheduler?
+    I believe it should be relatively easy to add a new scheduling policy into the scheduler.
+
+(3)Does your program offer input error checking?
+    Yes, my program does check for input error checking. If an input is entered wrong, the user will be notified.
+
+
+
+7.3(3points) Miscellaneous factors
+
+(1)Is your code elegant?
+    Yes, my code should be very presentable and easy to read with comments to guide the reader.
+
+(2)How innovative is your solution? Did you try any ideas not suggested here?
+    I'm not sure if my solution is innovative. Only suggestion I have for a new solution is having 1 file with all
+    scheduling algorithms and being able to call any from the one file.
+
+(3)Did you document all outside sources?
+    Yes, all outside source links are listed below.
+
+
+Outside sources:
+FCFS Scheduling - https://www.guru99.com/fcfs-scheduling.html
+RR Scheduling - https://www.guru99.com/round-robin-scheduling-example.html
+SRTF Scheduling - https://www.geeksforgeeks.org/introduction-of-shortest-remaining-time-first-srtf-algorithm/
