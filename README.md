@@ -1,4 +1,4 @@
-# undergrad
+# Auburn Undergrad
 This is a repository that will contain many of my course work at Auburn University
 
 This may also include personal projects made during undergrad.
