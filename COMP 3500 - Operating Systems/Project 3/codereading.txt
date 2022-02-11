@@ -1,0 +1,82 @@
+4.1 Thread Questions
+
+1)What happens to a thread when it exits (i.e., callsthread_exit())? What about when it sleeps?
+  Answer: When a thread exits, it ensures the stack isn’t mangled, removes
+          its virtual memory space and destroys it, decrements the counter
+          of whatever vnode it may be poitning at, puts itself into a zombie
+          state, S_ZOMB, and preps itself to panic if it ever runs again
+          before it dies. When it sleeps, it makes sure it’s not in an interrupt
+          handler, yields control to the next thread, enters the S_SLEEP
+          state, and only starts taking control once more when wakeup() is
+          called on its address.
+
+2)What function(s) handle(s) a context switch?
+  Answer: There are two functions that handle a context switch: mi_switch,
+          which is the high level, machine-independent context switch
+          function, and md_switch, which is the machine-independent code
+          that actually does the context switch. mi_switch is in thread.c, and
+          md_switch is in pcb.c
+
+3)How many thread states are there? What are they?
+ Answer: There are four thread states - S_RUN, S_READY, S_SLEEP, and
+         S_ZOMB. These states are defined in kern/thread/thread.c. They
+         express whether the thread is running, ready to run, sleeping, or a
+         zombie.
+
+4)What does it mean to turn interrupts off?
+  How is this accomplished?
+  Why is it important to turn off interrupts in the thread subsystem code?
+    Answer: If interrupts are turned off, then even if an interrupt is signaled the
+            handler is not called until interrupts are turned back on. Interrupts
+            are turned off using the function splhigh (set priority level high)
+            and back on again using spl0 (set priority level zero). The priority
+            level can also be set to intermediate levels (or at least, it could if
+            OS/161 supported them) using the splx function. Turning off
+            interrupts for thread operations is necessary to ensure that these
+            operations complete successfully and aren’t broken
+            mid-execution. For example, things could go pretty badly if the
+            scheduler interrupted us in the middle of a context switch and tried
+            to start executing a thread that wasn’t finished setting up its stack.
+            And it would be really awful if someone interrupted us in the
+            middle of forking!
+
+5) What happens when a thread wakes up another thread? How does a sleeping thread get to run again?
+  Answer: It removes the sleeping thread from the queue, and calls
+          make_runnable on the thread, which currently adds it to the end of
+          the runqueue. The thread gets to run again when an mi_switch is
+          called, and that thread is returned by the scheduler.
+
+4.2 Scheduler Questions
+6) What function is responsible for choosing the next thread to run?
+  Answer: struct thread * scheduler(void);
+
+7) How does that function pick the next thread?
+  Answer: it uses a round-robin run queue
+          that schedules each thread in the queue in equal time-slice
+          without priorities.
+
+8) What role does the hardware timer play in scheduling? What hardware independent
+function is called on a timer interrupt?
+  Answer: The interrupt handler for the hardware timer calls hardclock,
+          defined in src/kern/thread/hardclock.c. The method hardclock
+          finishes by calling thread_yield every time it is run, forcing a
+          context switch.
+
+4.3 Synchronization Questions
+9) Describe how thread_sleep() and thread_wakeup() are used to implement
+   semaphores. What is the purpose of the argument passed to thread_sleep()?
+    Answer: thread_sleep is used in the P function of the semaphore. This
+            function suspends the current thread until the semaphore count is
+            greater than zero.
+            thread_wakeup() is used in the V function of the semaphore. This
+            function wakes up all the suspended threads waiting on the
+            current semaphore.
+            The addr argument that is passed in is the address of the object
+            (in this case, semaphore) the sleeping thread is associated with.
+            This is required so that when thread_wakeup is called on the
+            same semaphore, it can selectively wake up only the threads
+            associated with that particular semaphore.
+
+10) Why does the lock API in OS/161 provide lock_do_i_hold(), but not
+    lock_get_holder()?
+      Answer:
